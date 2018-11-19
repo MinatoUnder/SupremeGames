@@ -118,8 +118,7 @@ const bot = new Discord.Client();
 
 client.on("guildMemberAdd", member => {
   member.createDM().then(function (channel) {
-  return channel.send(` **Welcome To Supreme Games,** :rose: 
-**You Are Member** ${member.guild.memberCount} `) 
+  return channel.send(` **Welcome To Supreme Games,** :rose: `) 
 }).catch(console.error)
 })
 

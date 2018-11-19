@@ -82,6 +82,7 @@ message.author.sendMessage(`
 ─════════════ {✯اوامر البوت✯} ════════════─
  ❖ -user معلومات عن حسابك الشخصي
  ❖ -server معلومات حول السيرفر
+ ❖ -tl3 رفع الروم
  ❖ -mvall سحب الكل الى رومك الروم صوتي
  ❖ -move سحب عضو الى رومك الروم صوتي
  ❖ -clr مسح الرسائل الموجوده في الروم بلا عدد
@@ -96,7 +97,8 @@ message.author.sendMessage(`
  ❖ -count يعرض لك عدد الاشخاص بالسيرفر بدون بوتات
  ❖ -ban حضر عضو من السيرفر
  ❖ -unban لازالة باند على احد
- ❖ -cc انشاء الوان
+ ❖ -ccolor انشاء الوان
+ ❖ -color اختيار لون
  ❖ -kick طرد عضو من السيرفر
  ❖ -mute اعضاء ميوت كتابي لعضو في السيرفر
  ❖ -unmute فك الميوت عن عضو في السيرفر
@@ -106,7 +108,8 @@ message.author.sendMessage(`
  ❖ -role humans اعطاء رتب للبشريين
  ❖ -role bots اعطاء رتبه للبوتات
  ❖ -role all اعطاء رتبه للجميع سواء بشر او بوتات
- ❖ -bc رسالة جماعية الى كل اعضاء السيرفر
+ ❖ -bc1 رسالة جماعية الى كل اعضاء السيرفر ب امبد
+ ❖ -bc2 رسالة جماعية الى كل اعضاء السيرفر بدون امبد مع منشن
  ❖ -vkick يطرد شخص من الرووم
  ❖ -unall ازالة الباند عن الجميع
  ❖ -lock  اخفاء الشات
@@ -183,7 +186,7 @@ client.on("message", (message) => {
  client.on('message', message => {
   	    var prefix = "-";
                 if(!message.channel.guild) return;
-      if(message.content.startsWith(prefix + 'bc2')) {
+      if(message.content.startsWith(prefix + 'bc1')) {
       if(!message.channel.guild) return message.channel.send('**This Command Only For Servers**').then(m => m.delete(5000));
     if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**You Dont Have perms** `ADMINISTRATOR`' );
       let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
@@ -224,43 +227,20 @@ client.on("message", (message) => {
       }
       });
 
+client.on("message", message => {
 
-
- client.on('message', message => {
-  	    var prefix = "-";
-                if(!message.channel.guild) return;
-      if(message.content.startsWith(prefix + 'bc1')) {
-      if(!message.channel.guild) return message.channel.send('**This Command Only For Servers**').then(m => m.delete(5000));
-    if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**You Dont Have perms** `ADMINISTRATOR`' );
-      let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-      let copy = "Ruggerz Bot";
-      let request = `Requested By ${message.author.username}`;
-      if (!args) return message.reply('**Write Some Things To Broadcast**');message.channel.send(`**Are You Sure \nThe Broadcast: ** \` ${args}\``).then(msg => {
-      msg.react('✅')
-      .then(() => msg.react('❌'))
-      .then(() =>msg.react('✅'))
-      
-      let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
-      let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
-      
-      let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
-      let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
-   reaction1.on("collect", r => {
-      message.channel.send(`**☑ | Done ... The Broadcast Message Has Been Sent To __${message.guild.members.size}__ Members**`).then(m => m.delete(5000));
-      message.guild.members.forEach(m => {
+            if (message.content.startsWith(prefix + "bc2")) {
+                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 
   message.guild.members.filter(m => m.presence.status !== 'all').forEach(m => {
  m.send(`${argresult}\n ${m}`);
-      })
-      })
-      reaction2.on("collect", r => {
-      message.channel.send(`**Broadcast Canceled.**`).then(m => m.delete(5000));
-      msg.delete();
-      })
-      })
-      }
-      });
+})
+ message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'all').size}\` : عدد الاعضاء المستلمين`); 
+ message.delete(); 
+};     
+});
+
 
 client.on('message', message => {
                                 if(!message.channel.guild) return;
@@ -294,6 +274,18 @@ message.channel.send({embed:embed});
                }
              }
         });
+
+client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const stewart = member.guild.channels.find("name", "chat");
+     stewart.send(`<@${member.user.id}> **Welcome To Supreme Server Invited By ->** <@${inviter.id}>`);
+   //  stewart.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
+  }); 
+});
+
 
 client.on('message', message => {
 	var prefix = "-";
@@ -688,7 +680,7 @@ client.on('message', msg => {
 
   if (msg.content === 'Hi') {
 
-    msg.reply('**Hi <3**');
+    msg.reply('**Hi :hearts: **');
 
   }
 

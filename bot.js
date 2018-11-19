@@ -52,6 +52,11 @@ client.user.setGame(`Supreme Server ✨`,"http://twitch.tv/Ninja")
 });
 
 
+client.on('ready',async () => {
+  client.channels.find(ch => ch.id === "513796404830011421" && ch.type === 'voice').join();
+});
+
+
 
 
 client.on("guildMemberAdd", member => {

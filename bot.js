@@ -52,6 +52,78 @@ client.user.setGame(`Supreme Server ✨`,"http://twitch.tv/Ninja")
 });
 
 
+client.on('guildMemberAdd', member => {
+    let channel = member.guild.channels.find('name', 'chat');
+    let memberavatar = member.user.avatarURL
+      if (!channel) return; 
+    let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField(':running_shirt_with_sash: | name :  ',`${member}`)
+        .addField(':loudspeaker: | ✨ نورت السيرفر ي قلبي' , `Welcome to the server, ${member}`)
+        .addField(':id: | user :', "**[" + `${member.id}` + "]**" )
+                .addField('➡| You Are Member',`${member.guild.memberCount}`)
+               
+                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
+                      
+                                     .addField(' الـسيرفر', `${member.guild.name}`,true)
+                                       
+     .setFooter("**Supreme Server **")
+        .setTimestamp()
+    
+      channel.sendEmbed(embed);
+    });
+
+var antispam = require("anti-spam");//npm i anti-spam
+ 
+antispam(client, {
+  warnBuffer: 3, //الحد الأقصى المسموح به من الرسائل لإرسالها في الفاصل الزمني قبل الحصول على تحذير.
+  maxBuffer: 5, // الحد الأقصى المسموح به من الرسائل لإرسالها في الفاصل الزمني قبل الحصول على ميوت.
+  interval: 1000, // مقدار الوقت قبل حصول باند
+  warningMessage: "stop spamming.", // رسالة تحذير اذا سوا سبام!
+  roleMessage: "Muted!!", // الرسالة الي تجي اذا شخص اخذ ميوت
+  roleName: "Muted", // اسم رتبة الميوت
+  maxDuplicatesWarning: 7, // عدد الرسايل الي قبل التحذيرات
+  maxDuplicatesBan: 10, // عدد الرسايل الي يقدر المستخدم يرسلها قبل الميوت
+  time: 10, // عدد الوقت الي يجلس لين تسحب رتبة الميوت من الشخص الحسبة برمجية وليست كتابية 
+});
+
+client.on('guildMemberAdd', member => {
+    var embed = new Discord.RichEmbed()
+    .setThumbnail(member.user.avatarURL)
+  .addField("***شكرا الانضمامك الينا***" ,member.user.username )
+    .setDescription('***بكل حب واحترام وشوق نستقبلك ونتمنى لك قضآء أجمل اللحظات ولآوقات معنا***')
+    .setColor('RANDOM')
+    .setImage('http://www.imgion.com/images/01/Welcome-buddy.jpg')
+var channel =member.guild.channels.find('name', 'chat')
+if (!channel) return;
+channel.send({embed : embed});
+});
+
+client.on('guildMemberAdd', member=> {
+    member.addRole(member.guild.roles.find("name",".Supreme"));
+    });
+
+client.on("guildMemberAdd", (member) => {
+    const guild = member.guild;
+    if (!newUsers[guild.id]) newUsers[guild.id] = new Discord.Collection();
+    newUsers[guild.id].set(member.id, member.user);
+  
+    if (newUsers[guild.id].size > 2) {
+      const userlist = newUsers[guild.id].map(u => u.toString()).join(" ");
+      guild.channels.get(guild.id).send("Welcome our new users!\n" + userlist);
+      newUsers[guild.id].clear();
+    }
+  });
+  
+  client.on("guildMemberRemove", (member) => {
+    const guild = member.guild;
+    if (newUsers[guild.id].has(member.id)) newUsers.delete(member.id);
+  });
+
+
+
+
 client.on('message', message => {
   if (message.author.bot) return;
    if (message.content === prefix + "help") {

@@ -53,11 +53,7 @@ client.user.setGame(`Supreme Server ✨`,"http://twitch.tv/Ninja")
 
 
 
-const Discord = require("discord.js");
 const bot = new Discord.Client();
-var Canvas = require('canvas');// npm i canvas
-var jimp = require('jimp');// npm i jimp 
-const fs = require("fs");// npm i fs
 
       bot.on('guildMemberAdd', member => {
       const welcomer =  member.guild.channels.find('name', 'chat');

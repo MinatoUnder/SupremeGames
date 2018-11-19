@@ -52,40 +52,80 @@ client.user.setGame(`Supreme Server ✨`,"http://twitch.tv/Ninja")
 });
 
 
-client.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', 'chat');
-    let memberavatar = member.user.avatarURL
-      if (!channel) return; 
-    let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(memberavatar)
-        .addField(':running_shirt_with_sash: | name :  ',`${member}`)
-        .addField(':loudspeaker: | ✨ نورت السيرفر ي قلبي' , `Welcome to the server, ${member}`)
-        .addField(':id: | user :', "**[" + `${member.id}` + "]**" )
-                .addField('➡| You Are Member',`${member.guild.memberCount}`)
-               
-                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
-                      
-                                     .addField(' الـسيرفر', `${member.guild.name}`,true)
-                                       
-     .setFooter("**Supreme Server **")
-        .setTimestamp()
-    
-      channel.sendEmbed(embed);
-    });
+
+const Discord = require("discord.js");
+const bot = new Discord.Client();
+var Canvas = require('canvas');// npm i canvas
+var jimp = require('jimp');// npm i jimp 
+const fs = require("fs");// npm i fs
+
+      bot.on('guildMemberAdd', member => {
+      const welcomer =  member.guild.channels.find('name', 'chat');
+      var Canvas = require('canvas')
+      var jimp = require('jimp')
+
+      const w = ['./img/w1.png'];
+
+              let Image = Canvas.Image,
+                  canvas = new Canvas(401, 202),
+                  ctx = canvas.getContext('2d');
+              ctx.patternQuality = 'bilinear';
+              ctx.filter = 'bilinear';
+              ctx.antialias = 'subpixel';
+              ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+              ctx.shadowOffsetY = 2;
+              ctx.shadowBlur = 2;
+              fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
+                  if (err) return console.log(err)
+                  let BG = Canvas.Image;
+                  let ground = new Image;
+                  ground.src = Background;
+                  ctx.drawImage(ground, 0, 0, 401, 202);
+
+      })
+
+                      let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".gif" : member.user.displayAvatarURL;
+                      jimp.read(url, (err, ava) => {
+                          if (err) return console.log(err);
+                          ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
+                              if (err) return console.log(err);
+
+                              
+                              let Avatar = Canvas.Image;
+                              let ava = new Avatar;
+                              ava.src = buf;
+                              ctx.drawImage(ava, 152, 27, 95, 95);
+
+                                                      //wl
+                              ctx.font = '20px Arial Bold';
+                              ctx.fontSize = '15px';
+                              ctx.fillStyle = "#FFFFFF";
+                              ctx.textAlign = "center";
+                                                         ctx.fillText(member.user.username, 200, 154);
+
+                              //NAME
+                              ctx.font = '20px Arial';
+                              ctx.fontSize = '28px';
+                              ctx.fillStyle = "#FFFFFF";
+                              ctx.textAlign = "center";
+                                    ctx.fillText(`انت العضو رقم${member.guild.memberCount} `
+                              , 200, 190);
+
+ welcomer.sendFile(canvas.toBuffer())
 
 
-client.on('guildMemberAdd', member => {
-    var embed = new Discord.RichEmbed()
-    .setThumbnail(member.user.avatarURL)
-  .addField("***شكرا الانضمامك الينا***" ,member.user.username )
-    .setDescription('***بكل حب واحترام وشوق نستقبلك ونتمنى لك قضآء أجمل اللحظات ولآوقات معنا***')
-    .setColor('RANDOM')
-    .setImage('http://www.imgion.com/images/01/Welcome-buddy.jpg')
-var channel =member.guild.channels.find('name', 'chat')
-if (!channel) return;
-channel.send({embed : embed});
-});
+
+      })
+      })
+      });
+
+
+client.on("guildMemberAdd", member => {
+  member.createDM().then(function (channel) {
+  return channel.send(` **Welcome To Supreme Games,** :rose: 
+**You Are Member** ${member.guild.memberCount} `) 
+}).catch(console.error)
+})
 
 client.on('guildMemberAdd', member=> {
     member.addRole(member.guild.roles.find("name",".Supreme"));

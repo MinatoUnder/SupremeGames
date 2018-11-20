@@ -66,6 +66,13 @@ client.on('guildMemberAdd', member=> {
     member.addRole(member.guild.roles.find("name",".Supreme"));
     });
 
+client.on("ready", () => {
+  function lol() {
+    client.guilds.get('513796404830011409').roles.find("name", "Rainbow.").setColor("RANDOM");
+  };
+  setInterval(lol, 1600);
+});
+
 
 
 

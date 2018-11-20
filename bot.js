@@ -51,6 +51,10 @@ client.user.setGame(`Supreme Server ✨`,"http://twitch.tv/Ninja")
 });
 
 
+client.on('guildMemberAdd', member=> {
+    member.addRole(member.guild.roles.find("name",".Supreme"));
+    });
+
 
 
 

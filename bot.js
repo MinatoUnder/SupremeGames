@@ -113,7 +113,7 @@ client.on('message', async message => {
         var modRole = message.guild.roles.find(r => r.name === '⚛, Supervisor');// Alpha Codes
        
         if(message.guild.member(message.author).roles.has(modRole.id)) return message.channel.send(':x: | معك الرتبة');// Alpha Codes
-        if(!subChannel) return message.channel.send(':x: | يجب ان يتوفر روم اسمه `support-join`');// Alpha Codes
+        if(!subChannel) return message.channel.send(':x: | يجب ان يتوفر روم اسمه `_apply`');// Alpha Codes
        
         message.channel.send(':timer: | **اكتب اسمك الحقيقي الان من فضلك**').then(msgS => {
             message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] }).then(collected => {
@@ -156,7 +156,7 @@ client.on('message', async message => {
                                            
                                             yesSend.on('collect', r => {
                                                 msgS.delete();
-                                                message.channel.send(':white_check_mark: | تم تقديم طلبك بنجاح انتظر النتيجة في روم support-accept').then(msg => msg.delete(5000));
+                                                message.channel.send(':white_check_mark: | تم تقديم طلبك بنجاح انتظر النتيجة في روم support-apply').then(msg => msg.delete(5000));
                                                
                                                 let subMsg = new Discord.RichEmbed()
                                                 .setAuthor(message.author.tag, message.author.avatarURL)
@@ -172,8 +172,8 @@ client.on('message', async message => {
                                                 subChannel.send(subMsg).then(msgS => {
                                                     msgS.react('✅').then(() => msgS.react('❎'))
                                                    
-                                                    let accept = (reaction, user) => reaction.emoji.name === '✅'  && user.id === 'ايدي الي يقبل الطلب'
-                                                    let noAccept = (reaction, user) => reaction.emoji.name === '❎' && user.id === 'ايدي الي يقبل الطلب'
+                                                    let accept = (reaction, user) => reaction.emoji.name === '✅'  && user.id === '415595760990552065','466279297745813507','326466810150912000,'314845344313901057'
+                                                    let noAccept = (reaction, user) => reaction.emoji.name === '❎' && user.id === '415595760990552065','466279297745813507','326466810150912000,'314845344313901057'
                                                    
                                                     let acceptRe = msgS.createReactionCollector(accept);
                                                     let noAcceptRe = msgS.createReactionCollector(noAccept);

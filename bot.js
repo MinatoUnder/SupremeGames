@@ -74,7 +74,6 @@ console.log("Welcome Again !");
                 message.channel.sendMessage(:white_check_mark:   ${argresult}`)
       })
       })
-      });
 
 
 

@@ -56,6 +56,44 @@ client.on('guildMemberAdd', member=> {
     });
 
 
+client.on("guildMemberAdd", member => {
+        if(member.guild.id === "513796404830011409") {  // ايدي السيرفر
+  const channel = member.guild.channels.find('id', '513796404830011415'); //ايدي الروم
+if (!channel) return;
+channel.send(`**<@${member.user.id}> ,Welcome To Supreme Games...** ❤️ `)  
+}});
+
+
+client.on('message', message => {
+    if (message.content.startsWith("Link")) {
+
+  message.channel.createInvite({
+        thing: true,
+        maxUses: 100,
+        maxAge: 86400
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+    const embed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setDescription(" **| :white_check_mark:  | :heart:  Chek Ur Dm**  ")
+      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
+              const Embed11 = new Discord.RichEmbed()
+        .setColor("RANDOM")
+                .setAuthor(message.guild.name, message.guild.iconURL)
+        .setDescription(`
+**
+---------------------
+-[${message.guild.name}]  هذا هو رابط سيرفر
+---------------------
+-هذا الرابط صالح ل 100 مستخدم فقط
+---------------------
+-هذا الرابط صالح لمده 24 ساعه فقط
+---------------------
+**`)
+      message.author.sendEmbed(Embed11)
+    }
+});
 
 
 
@@ -74,6 +112,7 @@ client.on("ready", () => {
   setInterval(lol, 1600);
 });
 
+client.on('ready',async () => { client.channels.find(ch => ch.id === "513796404830011421" && ch.type === 'voice').join(); });
 
 
 

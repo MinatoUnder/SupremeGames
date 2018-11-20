@@ -172,8 +172,8 @@ client.on('message', async message => {
                                                 subChannel.send(subMsg).then(msgS => {
                                                     msgS.react('✅').then(() => msgS.react('❎'))
                                                    
-                                                    let accept = (reaction, user) => reaction.emoji.name === '✅'  && user.id === '415595760990552065','466279297745813507','326466810150912000,'314845344313901057'
-                                                    let noAccept = (reaction, user) => reaction.emoji.name === '❎' && user.id === '415595760990552065','466279297745813507','326466810150912000,'314845344313901057'
+                                                    let accept = (reaction, user) => reaction.emoji.name === '✅'  && user.id === '415595760990552065','466279297745813507','326466810150912000,'314845344313901057
+                                                    let noAccept = (reaction, user) => reaction.emoji.name === '❎' && user.id === '415595760990552065','466279297745813507','326466810150912000,'314845344313901057
                                                    
                                                     let acceptRe = msgS.createReactionCollector(accept);
                                                     let noAcceptRe = msgS.createReactionCollector(noAccept);

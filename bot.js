@@ -54,7 +54,7 @@ client.on('message', message=> {
     if (message.author.bot) return;
     if (message.isMentioned(client.user))
     {
-    message.reply(" **كيف اقدر اساعدك!!** ");
+    message.reply(" **كيف اقدر اساعدك!** ");
     }
 });
 
@@ -72,7 +72,10 @@ console.log("Welcome Again !");
             if (message.content.startsWith(adminprefix + 'st')) {
               client.user.setGame(argresult, "https://www.twitch.tv/Ninja");
                 message.channel.sendMessage(:white_check_mark:   ${argresult}`)
-}});
+      })
+      })
+      }
+      });
 
 
 

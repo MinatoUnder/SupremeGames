@@ -192,7 +192,7 @@ client.on("message", (message) => {
  client.on('message', message => {
   	    var prefix = "-";
                 if(!message.channel.guild) return;
-      if(message.content.startsWith(prefix + '1bc')) {
+      if(message.content.startsWith(prefix + 'bc')) {
       if(!message.channel.guild) return message.channel.send('**This Command Only For Servers**').then(m => m.delete(5000));
     if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**You Dont Have perms** `ADMINISTRATOR`' );
       let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
@@ -235,7 +235,7 @@ client.on("message", (message) => {
 
 client.on("message", message => {
 
-            if (message.content.startsWith(prefix + "2bc")) {
+            if (message.content.startsWith(prefix + "sbc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 

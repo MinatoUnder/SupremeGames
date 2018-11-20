@@ -72,8 +72,7 @@ console.log("Welcome Again !");
             if (message.content.startsWith(adminprefix + 'st')) {
               client.user.setGame(argresult, "https://www.twitch.tv/Ninja");
                 message.channel.sendMessage(:white_check_mark:   ${argresult}`)
-            })
-            });
+}});
 
 
 

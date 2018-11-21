@@ -2486,7 +2486,6 @@ message.channel.setPosition(args[1]).then(c => {
 
 
 
-  let command = msg.content.toLowerCase().split(' ')[0];
 	command = command.slice(prefix.length)
 
   let args = msg.content.split(" ").slice(1);

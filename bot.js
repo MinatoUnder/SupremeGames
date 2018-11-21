@@ -124,7 +124,7 @@ client.on("ready", () => {
   function lol() {
     client.guilds.get('513796404830011409').roles.find("name", "Rainbow.").setColor("RANDOM");
   };
-  setInterval(lol, 1600);
+  setInterval(lol, 3000);
 });
 
 client.on('ready',async () => { client.channels.find(ch => ch.id === "513796404830011421" && ch.type === 'voice').join(); });

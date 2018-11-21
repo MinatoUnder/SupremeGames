@@ -2565,7 +2565,7 @@ message.channel.setPosition(args[1]).then(c => {
           if (!person.roles.has('514841316665065472')) return msg.reply(`هذا الشخص ليس مقدم`)
           msg.reply(`تم قبول الشخص بنجاح`)
           person.addRole('514841316665065472').catch(console.error);
-
+        }
 
 
 client.login(process.env.BOT_TOKEN);

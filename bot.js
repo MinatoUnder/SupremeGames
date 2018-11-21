@@ -2485,7 +2485,21 @@ message.channel.setPosition(args[1]).then(c => {
 
 
 
+let prefix = '$',
+    prefix2 = '$'
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
 
+client.on('message', msg => {
+
+  if (msg.content === prefix + 'ping') {
+    msg.channel.send('Pinging...').then(sent => {
+      sent.edit(`Pong! Took ${sent.createdTimestamp - msg.createdTimestamp}ms`);
+  });
+  }
+    
+  let command = msg.content.toLowerCase().split(' ')[0];
 	command = command.slice(prefix.length)
 
   let args = msg.content.split(" ").slice(1);

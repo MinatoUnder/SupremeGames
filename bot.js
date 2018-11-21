@@ -59,7 +59,10 @@ client.on('message', message=> {
 });
 
 
-
+client.on('ready', () => {
+    client.user.setStatus("dnd");
+ 
+ });
 
 
 
@@ -2479,6 +2482,89 @@ message.channel.setPosition(args[1]).then(c => {
 });
 }
 });
+
+
+
+
+  let command = msg.content.toLowerCase().split(' ')[0];
+	command = command.slice(prefix.length)
+
+  let args = msg.content.split(" ").slice(1);
+
+  if (command == 'apply' || command == 'تقديم') {
+    if (msg.member.roles.has('514844150667935774')) return msg.reply(`انت مقدم بالفعل`)
+    if (msg.channel.id !== '514844654177615875') return msg.reply(`لا يمكنك التقديم هنا توجه الى روم \n\ <#514844654177615875>`)
+    let message = msg;
+    if (!args[0]) return msg.reply(`رجاء اكتب اسمك و عمرك و موطنك و سبب رغبتك في ان تكون من الستاف`)
+     let answer = args.join(" ")
+          msg.reply(`تقديمك يعني موافقتك على الشروط الآتية
+          - يجب ان تحترم اعضاء السيرفر و الستاف حقه
+          - يجب ان تكتب كل معلوماتك صحيحة
+          - عدم استعمال خاصية البرودكاست 
+          - يجب ان تكون عربياً 
+          - يجب ان تكون متفاعل في السيرفر و تساعد من يريد مساعدة 
+          ✅ | موافق ومعي اياها كلها
+          ❎ | لا يبوي كنسل .. شروطكم صعبة
+          `).then(m => {
+            m.react('✅')
+            m.react('❎')
+            m.awaitReactions((reaction, user) => user.id == msg.author.id, {time: 60000, maxEmojis: 1})
+            .then(result => {
+              var reaction = result.firstKey();
+             if (reaction == '✅' || reaction == '❎') {
+               if (reaction == '✅') {
+               msg.reply(`لقد تم تقديمك
+               تقديمك لا يعني بالضرورة قبولك
+               
+               في حال ادخال معلومات غير صحيحة .. سوف يتم عقابك
+               `)
+               msg.member.addRole('514844150667935774').catch(console.error);
+               msg.guild.channels.get('514843540627652618').send(`
+               تقديم جديد
+               \`المقدم\`
+               <@!${msg.author.id}> 
+                 \` معلومات التقديم \`
+                 ${args.join(" ")}
+                 ------------------
+                 للقبول
+                 $accept <@!${msg.author.id}>
+               `).then(m => {
+                 m.react('✅')
+                 m.react('❎')
+                 m.awaitReactions((reaction, user) => user.id == msg.author.id, {maxEmojis: 1})
+                 .then(result => {
+                  var reaction = result.firstKey();
+                 if (reaction == '✅') {
+                   msg.member.addRole('514841316665065472')
+                   msg.guild.channels.get('514843106110210067').send(`Done .. `)
+                   msg.member.send(`
+                   مبروووووووووووك
+                   لقد تم قبولك الان 
+                   `)
+                 }
+                 if (reaction == '❎') {
+                   m.delete();
+                 }
+                 });
+               })
+               }
+               if (reaction == '❎') {
+                 msg.reply(`لقد تم كنسل تقديمك .. `).then(m => m.delete(5000))
+                 msg.delete();
+               }
+               
+             }
+            });
+          })
+        }
+        let ownerrole = msg.guild.roles.find('name', '♛, Founder');
+        if (command == 'accept') {
+          if (!msg.member.roles.has(ownerrole)) return;
+          let person = msg.mentions.members.first()
+          if (!person) return msg.reply(`عليك بمنشن احد الاشخاص`)
+          if (!person.roles.has('514841316665065472')) return msg.reply(`هذا الشخص ليس مقدم`)
+          msg.reply(`تم قبول الشخص بنجاح`)
+          person.addRole('514841316665065472').catch(console.error);
 
 
 

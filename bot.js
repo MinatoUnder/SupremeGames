@@ -2485,8 +2485,7 @@ message.channel.setPosition(args[1]).then(c => {
 
 
 
-let prefix = '$',
-    prefix2 = '$'
+let prefix2 = '$'
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
